@@ -1,9 +1,17 @@
 h1 {
   text-align: center;
+  font-family: 'Lobster', cursive;
 }
+
+main{
+    width: 1024px;
+    margin: 0 auto;
+}
+
 #weeks-grid {
   width: 870px;
   height: auto;
+  float: left;
   margin: 20px auto;
 }
 
@@ -24,11 +32,6 @@ h1 {
   float: left;
 }
 
-#container {
-  width: 1024px;
-  margin: 20px auto;
-}
-
 #main-box {
   width: 875px;
   height: auto;
@@ -36,28 +39,30 @@ h1 {
   border: solid 1px #CCC;
 }
 
-#details-box {
-  width: 140px;
-  height: 2048px;
-  float: left;
-  background-color: #CCC;
-}
-
 .desc-box {
-  display: none;
-  margin: 10px;
-  width: 100%;
-  height: 100px;
+  width: 150px;
+  height: auto;
+  float: left;
+  margin-top: 20px;
+  background-color: #FFF;
 }
 
-.title {
+.descOn {
   display: none;
-  margin: 10px;
 }
 
-.description {
-  /*display: none;*/
-  margin: 10px;
+.form-box {
+  padding: 20px;
+  color: #090566;
+}
+
+.event-title {
+  color: #038662;
+}
+
+.descOff {
+  color: #038662;
+  display: none;
 }
 
 .blue {
