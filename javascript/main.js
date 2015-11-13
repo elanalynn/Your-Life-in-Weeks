@@ -11,58 +11,49 @@ function drawGrid() {
     for(var j = 0; j < 52; j++) {
       unit = '<div class = "week-unit" id = "' + unitCounter++ + '" data-toggle="tooltip" title = "' + description + '"></div>';
       $('#weeks-grid').append(unit);
-    };
-  };
+    }
+  }
 }
 
 function cursorToPointer() {
-  $('.week-unit').hover(function() {
-    $(this).css('cursor', 'pointer');
+  $( '.week-unit' ).hover(function() {
+    $( this ).css( 'cursor', 'pointer' );
    });
 }
 
-function toggleBlue() {
-  $('.week-unit').click(function() {
-    if ($(this).hasClass('blue')){
-      $(this).removeClass('blue');
+function getFormData() {
+  var title = $('$event-title').val();
+  var description = $('$event-description').val();
+  console.log(title, desciption);
+  return title, description;
+}
+
+function clickHandler(title, description) {
+  $( '.week-unit' ).click(function() {
+    if ($( this ).hasClass( 'blue' )){
+      $( this ).removeClass( 'blue' );
+      $( '.desc-box').remove(title);
+      $( '.desc-box').remove(description);
     } else {
-      $(this).addClass('blue');
+      $( this ).addClass( 'blue' );
+      $( '.desc-box').append(title);
+      $( '.desc-box').append(description);
     }
   });
 }
 
-// function toggleDesc() {
-//   var description = "description";
-//   var title = "title";
-//   $('.week-unit').click(function() {
-//     if (('week-unit').hasClass('descOn')) {
-//       $('.description').removeClass('descOn')
-//       $('.description').addClass('descOff')
-//     } else {
-//       $(this).addClass('descOn');
-//       $('.desc-box').append('<h4 class = "event-title">' + title + '</h4> <p class = "description">' + description + '</p>');
-//     }
-//   });
-// }
-
-function toggleDesc() {
-  var description = "description";
-  var title;
-  $('.submit-event').click(function() {
-    title = $("#event-title").val();
+function hoverEffect() {
+  $( '.week-unit' ).hover(function() {
+    $( this ).fadeOut( 100 );
+    $( this ).fadeIn( 500 );
   });
-  $('.week-unit').click(function() {
-    $('.desc-box').append('<h4 class = "event-title">' + title + '</h4> <p class = "description">' + description + '</p>');
-  });
-
-
 }
 
 function init () {
   drawGrid();
   cursorToPointer();
-  toggleBlue();
-  toggleDesc();
-};
+  clickHandler();
+  hoverEffect();
+}
 
 $(document).ready(init());

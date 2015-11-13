@@ -65,6 +65,10 @@ main{
   display: none;
 }
 
+.btn {
+  margin: 10px;
+}
+
 .blue {
   background-color: #0f30e2;
 }
