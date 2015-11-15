@@ -8,33 +8,44 @@
     <meta name='author' content='Elana Kopelevich'>
     <!--<link rel='icon' href='../graphics/favicon.png'>-->
     <title>Your Life in Weeks</title>
-    <link rel="stylesheet" href="../css/style.css" media="screen" title="main" charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles_grid.css" media="screen" title="main" charset="utf-8">
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse navbar-static-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"></a>
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                  <img src="../images/inWeeksLogo.png" alt="Your Life in Weeks logo"  width="100px"/>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-        <ul class="nav navbar-nav">
-          <li><a href="index.com">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">LOGIN</a></li>
-        </ul>
-      </nav>
+        <!-- /.container -->
+    </nav>
 
 
       </div><!-- /.container-fluid -->
@@ -46,40 +57,14 @@
         <article id="weeks-grid">
         </article>
         <div class="desc-box">
-
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#initial-modal">
-            Get Started
-          </button>
-
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#event-modal">
+          <p class="name-display"></p>
+          <p class="dob-display"></p>
+          <button type="button" class="btn btn-primary add-event" data-toggle="modal" data-target="#event-modal">
             Add an Event
           </button>
 
         </div><!-- /.details-box -->
       </main>
-
-      <div class="modal fade" id="initial-modal">
-        <div class="modal-dialog">
-          <div class="modal-content form-box">
-            <div class="modal-header">
-              <button type="button" name="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
-              <h4 class="modal-title">Who are you?</h4>
-            </div>
-            <form class="who-are-you" action="index.html" method="post">
-              <label for="name">What is your name?</label>
-              <input type="text" name="dob" value="">
-              <label for="name">What is your birthdate?</label>
-              <input type="text" name="name" value="">
-              <input type="button" name="initial-submit" value="initial-submit">
-            </form>
-
-            <div class="modal-footer">
-              <button type="button" name="button" class="btn btn-default" data-dismiss="modal"></button>
-            </div>
-          </div><!-- /.initial-modal-content -->
-        </div><!-- /.initial-modal-dialog -->
-      </div><!-- /.initial-modal -->
-
       <div class="modal fade" id="event-modal">
         <div class="modal-dialog">
           <div class="modal-content form-box">
@@ -87,7 +72,7 @@
               <button type="button" name="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
               <h4 class="modal-title">Add an Event</h4>
             </div>
-            <form>
+            <form class="add-event" action="weeks.html" method="post">
               <div class="form-group">
                 <label for="event-date">Date of Event</label>
                 <input type="date" class="#" id="event-date" placeholder="Event Date" required="true">
@@ -103,12 +88,7 @@
               <div class="form-group">
                 <label for="address">Address</label>
                 <input type="text" id="address">
-                <label for="city">City</label>
-                <input type="text" id="city">
-                <label for="postal">Postal Code</label>
-                <input type="text" id="postal">
-                <label for="country">Country</label>
-                <input type="text" id="country">
+                <p>Include city and state</P>
               </div>
               <button type="submit" class="btn btn-default submit-event" name="submit">Submit</button>
             </form>

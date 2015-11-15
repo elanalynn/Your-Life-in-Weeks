@@ -1,3 +1,45 @@
+//Splash Page Scripts Start
+
+// jQuery to collapse the navbar on scroll
+$(window).scroll(function() {
+    if ($(".navbar").offset().top > 50) {
+        $(".navbar-fixed-top").addClass("top-nav-collapse");
+    } else {
+        $(".navbar-fixed-top").removeClass("top-nav-collapse");
+    }
+});
+
+// jQuery for page scrolling feature - requires jQuery Easing plugin
+$(function() {
+    $('a.page-scroll').bind('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    });
+});
+
+// Closes the Responsive Menu on Menu Item Click
+$('.navbar-collapse ul li a').click(function() {
+    $('.navbar-toggle:visible').click();
+});
+
+//Button in initial-modal to got to grid page
+
+$username = $('.user-name').val();
+$birthday = $('.birthday').val();
+
+$('#initial-submit').click(function() {
+  window.location = 'weeks.html';
+});
+
+
+
+//Splash Page Scripts End
+
+//Grid Page Scripts Start
+
 function drawGrid() {
   var unitCounter = 1,
       unit,
@@ -19,6 +61,14 @@ function cursorToPointer() {
   $( '.week-unit' ).hover(function() {
     $( this ).css( 'cursor', 'pointer' );
    });
+  $( '.get-started' ).hover(function() {
+    $( this ).css( 'cursor', 'pointer' );
+  });
+}
+
+function diplayPersonalInfo() {
+  $('name-display').innerText(localStorage.get('user-name'));
+  $('name-display').innerText(localStorage.get('user-name'));
 }
 
 function getFormData() {
@@ -54,6 +104,9 @@ function init () {
   cursorToPointer();
   clickHandler();
   hoverEffect();
+  displayPersonalInfo();
 }
+//Grid Page Scripts Start
 
+//Generic Ready Function
 $(document).ready(init());

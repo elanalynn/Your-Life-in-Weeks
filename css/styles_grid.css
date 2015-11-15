@@ -1,18 +1,24 @@
+body {
+  background-color: #CCC;
+}
+
 h1 {
   text-align: center;
   font-family: 'Lobster', cursive;
+
 }
 
 main{
     width: 1024px;
-    margin: 0 auto;
+    margin: 50px auto;
+
 }
 
 #weeks-grid {
   width: 870px;
   height: auto;
   float: left;
-  margin: 20px auto;
+  margin: 50px auto;
 }
 
 .week-unit {
@@ -44,7 +50,7 @@ main{
   height: auto;
   float: left;
   margin-top: 20px;
-  background-color: #FFF;
+  background-color: #CCC;
 }
 
 .descOn {
