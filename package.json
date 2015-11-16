@@ -1,0 +1,22 @@
+{
+  "name": "your_life_in_weeks",
+  "version": "1.0.0",
+  "description": "visualization of a life in weeks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekopelevich/your_life_in_weeks.git"
+  },
+  "author": "Elana Kopelevich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ekopelevich/your_life_in_weeks/issues"
+  },
+  "homepage": "https://github.com/ekopelevich/your_life_in_weeks#readme",
+  "devDependencies": {
+    "gulp-sass": "^2.1.0"
+  }
+}

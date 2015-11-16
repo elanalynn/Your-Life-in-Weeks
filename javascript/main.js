@@ -27,18 +27,20 @@ $('.navbar-collapse ul li a').click(function() {
 
 //Button in initial-modal to got to grid page
 
-$username = $('.user-name').val();
-$birthday = $('.birthday').val();
+function setPersonalInfo() {
+  var username = $( '.username' ).val();
+  localStorage.setItem( 'username', username );
+  var birthday = $( '.birthday' ).val();
+  localStorage.setItem( 'birthday', birthday );
+}
 
 $('#initial-submit').click(function() {
-  window.location = 'weeks.html';
+  window.location = 'grid.html';
 });
 
+//Index scripts end
 
-
-//Splash Page Scripts End
-
-//Grid Page Scripts Start
+//Grid page scripts start
 
 function drawGrid() {
   var unitCounter = 1,
@@ -57,6 +59,11 @@ function drawGrid() {
   }
 }
 
+function displayPersonalInfo() {
+  $('.name-display').text = localStorage.getItem('username');
+  $('.dob-display').text = localStorage.getItem('birthday');
+}
+
 function cursorToPointer() {
   $( '.week-unit' ).hover(function() {
     $( this ).css( 'cursor', 'pointer' );
@@ -64,11 +71,6 @@ function cursorToPointer() {
   $( '.get-started' ).hover(function() {
     $( this ).css( 'cursor', 'pointer' );
   });
-}
-
-function diplayPersonalInfo() {
-  $('name-display').innerText(localStorage.get('user-name'));
-  $('name-display').innerText(localStorage.get('user-name'));
 }
 
 function getFormData() {
@@ -104,6 +106,7 @@ function init () {
   cursorToPointer();
   clickHandler();
   hoverEffect();
+  setPersonalInfo();
   displayPersonalInfo();
 }
 //Grid Page Scripts Start
