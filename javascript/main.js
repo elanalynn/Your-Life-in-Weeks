@@ -60,8 +60,9 @@ function drawGrid() {
 }
 
 function displayPersonalInfo() {
-  $('.name-display').text = localStorage.getItem('username');
-  $('.dob-display').text = localStorage.getItem('birthday');
+  $('#desc-box').prepend('<p>April 1, 1984</p>');//localStorage.getItem('birthday');
+  $('#desc-box').prepend('<h4>banana</h4>');//localStorage.getItem('username');
+
 }
 
 function cursorToPointer() {
@@ -76,6 +77,8 @@ function cursorToPointer() {
 function getFormData() {
   var title = $('$event-title').val();
   var description = $('$event-description').val();
+  localStorage.setItem('title', $('#event-title'));
+  localStorage.setItem('description', $('#description-id'));
   console.log(title, desciption);
   return title, description;
 }

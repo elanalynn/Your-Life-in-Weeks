@@ -246,12 +246,17 @@ label, input {
     margin-right: 10px;
     clear: left;
     float: left; }
-  #grid-page .desc-box {
+  #grid-page #desc-box {
     width: 150px;
     height: auto;
     float: left;
     margin-top: 20px;
     background-color: #CCC; }
+    #grid-page #desc-box h4 {
+      margin-top: 40px;
+      color: #333; }
+    #grid-page #desc-box p {
+      color: #333; }
   #grid-page .form-box {
     padding: 20px;
     color: #090566; }

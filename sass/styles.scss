@@ -322,12 +322,21 @@ label, input {
     float: left;
   }
 
-  .desc-box {
+  #desc-box {
     width: 150px;
     height: auto;
     float: left;
     margin-top: 20px;
     background-color: #CCC;
+
+    h4 {
+      margin-top: 40px;
+      color: #333;
+    }
+
+    p {
+      color: #333;
+    }
   }
 
   .form-box {
