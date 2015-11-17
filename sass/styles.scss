@@ -326,17 +326,8 @@ label, input {
     width: 150px;
     height: auto;
     float: left;
-    margin-top: 20px;
-    background-color: #CCC;
-
-    h4 {
-      margin-top: 40px;
-      color: #333;
-    }
-
-    p {
-      color: #333;
-    }
+    margin-top: 40px;
+    color: #333;
   }
 
   .form-box {
@@ -350,7 +341,7 @@ label, input {
 
   .event-info {
    //display: none;
-   color: red;
+   color: #333;
    background-color: #FFF;
    margin-top: 20px;
    padding: 5px;
