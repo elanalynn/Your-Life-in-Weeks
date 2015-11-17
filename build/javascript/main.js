@@ -91,36 +91,29 @@ function hoverEffect() {
 
 //get Form Data
 
-function eventSubmitListener() {
-  $( '#event-submit' ).click( function() {
-    var address = $( '.event-address' ).val();
-    //getAddress( address );
-    setEventInfo();
-    return address;
-  });
-}
+$( '#event-submit' ).click( function() {
+  var address = $( '.event-address' ).val();
+  //getAddress( address );
+  setEventInfo();
+  return address;
+
+});
 
 function weekClickListener() {
-
-//   for ( var i = 0; i < localStorage.length; i++ ){
-//     if( $(this[id=i] ===  ){
-//       $('#details-box').append(localStorage.getItem(localStorage.key(i)));
-//     }
-// }
-
+  console.log( 'weekClickListener' );
   $( '.week-unit' ).click( function() {
     if ($( this ).hasClass( 'blue' )){
       $( this ).removeClass( 'blue' );
       $( '.info-popup').hide();
     } else {
       $( this ).addClass( 'blue' );
-      //$( this ).children().last().show();
+      $( this ).children().last().show();
       $( '.info-popup' ).show();
     }
   });
 }
 
-function attachLifeEvent(weeksDiff, eventInfo) {
+function attachEvent(weeksDiff, eventInfo) {
 
   for (var i = 0; i < 5201; i++) {
     var parsedInfo,
@@ -134,7 +127,6 @@ function attachLifeEvent(weeksDiff, eventInfo) {
       parsedTitle = parsedInfo.title;
       parsedDescription = parsedInfo.description;
       console.log( parsedDate, parsedTitle, parsedDescription );
-
       $('.week-unit[id=' + i + ']').append //How do I place this in the 'details-box'?
         ('<div class="info-popup"><h4>' +
         parsedDate + '</h4><h3>' +
@@ -147,26 +139,17 @@ function attachLifeEvent(weeksDiff, eventInfo) {
 
 }
 
-function checkDate( date, eventInfo ) {
-  var birthdayMS = new Date( localStorage.getItem( 'birthday' ) ).getTime();
-  var eventDateMS = new Date( date ).getTime();
+function checkDate(date, eventInfo) {
+  var birthdayMS = new Date(localStorage.getItem( 'birthday' )).getTime();
+  var eventDateMS = new Date(date).getTime();
   var msToDayFactor = 86400000;
   var daysInWeek = 7;
-  var weeksDiff = Math.ceil( ( eventDateMS - birthdayMS ) / msToDayFactor / daysInWeek );
+  var weeksDiff = Math.ceil((eventDateMS - birthdayMS) / msToDayFactor / daysInWeek);
 
-  console.log( eventDateMS, birthdayMS, weeksDiff );
+  console.log(eventDateMS, birthdayMS, weeksDiff);
   localStorage.setItem( weeksDiff, JSON.stringify( eventInfo ) );
 
-  attachLifeEvent(weeksDiff, eventInfo);
-
-  for( var i = 0; i < 5200; i++ ){
-    if( weeksDiff === i ) {
-      console.log('eventLogged');
-      $( "#" + i ).addClass( 'red' );
-    } else if ( weeksDiff < i ) {
-      return null;
-    }
-  }
+  attachEvent(weeksDiff, eventInfo);
 }
 
 function setEventInfo() {
@@ -277,7 +260,6 @@ function init () {
   cursorToPointer();
   hoverEffect();
   displayPersonalInfo();
-  eventSubmitListener();
   weekClickListener();
   // eventListener();
 }

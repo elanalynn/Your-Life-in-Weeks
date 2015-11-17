@@ -350,8 +350,8 @@ label, input {
 
   .info-popup {
    display: none;
+   z-index: 1000; 
    width: 200px;
-   height: 400px;
    color: #333;
    background-color: #FFF;
   }

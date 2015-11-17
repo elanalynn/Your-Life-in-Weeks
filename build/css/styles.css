@@ -264,8 +264,8 @@ label, input {
     margin-top: 20px; }
   #grid-page .info-popup {
     display: none;
-    z-index: 1000;
     width: 200px;
+    height: 400px;
     color: #333;
     background-color: #FFF; }
   #grid-page .red {
