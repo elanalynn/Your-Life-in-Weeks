@@ -81,13 +81,13 @@ function cursorToPointer() {
 }
 
 function hoverEffect() {
-  $( '.week-unit' ).hover(function() {
+  $( '.week-unit' ).hover( function() {
     $( this ).fadeOut( 100 );
     $( this ).fadeIn( 500 );
   });
 }
 
-function checkEventsInLS() {
+function checkEventsInLocalStorage() {
 
   for ( var key in localStorage ) {
     console.log ( key );
@@ -114,28 +114,54 @@ function eventSubmitListener() {
 }
 
 function weekClickListener() {
+  var currentEvent = {},
+      parsedDate,
+      parsedTitle,
+      parsedDesc;
 
   $( '.week-unit' ).click( function() {
-    //var thisID = $(this).attr('id');
-    for ( var i = 0; i < localStorage.length; i++ ){
-      if( ($(this).attr('id')) === localStorage[i] ){
-        $('.event-info').empty();
-        $('.event-info').hide();
-        $('.event-info').append(localStorage.getItem(localStorage.key(i)));
-      }
-      // if ($( this ).hasClass( 'blue' )){
-      //   $( this ).removeClass( 'blue' );
-      //   //$( '.info-popup').hide();
-      // } else {
-      //   $( this ).addClass( 'blue' );
-      //   //$( this ).children().last().show();
-      //   //$( '.info-popup' ).show();
-      // }
+
+    // Check if the week has an associated event
+    if ($( this ).hasClass( 'red' )){
+      console.log('Something happened this week');
+    } else if ( ( $( this ).attr( 'id' ) ) > key1) {
+      console.log('Stop.');
+    } else {
+      console.log('Nothing happened this week.');
     }
+
+    // Loop through localStorage to compare keys to this
+    for ( var key in localStorage ) {
+      if ( $( this ).attr( 'id' ) == key ) {
+        // Assign variables to display
+        currentEvent = JSON.parse( localStorage.getItem( key ) );
+        parsedDate = currentEvent.date;
+        parsedTitle = currentEvent.title;
+        parsedDesc = currentEvent.description;
+    }
+  }
+
+    console.log( currentEvent, parsedDate, parsedTitle, parsedDesc );
+    console.log(this);
+    console.log( key );
+
+    // Clear out .event-info if there is anything in it and re-show it
+    $('.event-info').empty();
+    $('.event-info').hide();
+    $('.event-info').append( currentEvent );
+    $('.event-info').show();
+
+    // Append info to .event-info
+    $( '.event-info' ).append
+      ('<div class="event-info"><h4>' +
+      parsedDate + '</h4><h3>' +
+      parsedTitle + '</h3><p>' +
+      parsedDesc + '</p></div>');
+
   });
 }
 
-function attachLifeEvent(weeksDiff, eventInfo) {
+function getLifeEvent(weeksDiff, eventInfo) {
 
   for (var i = 0; i < 5201; i++) {
     var parsedInfo,
@@ -144,17 +170,13 @@ function attachLifeEvent(weeksDiff, eventInfo) {
         parsedDescription;
 
     if( i === weeksDiff ){
-      parsedInfo = JSON.parse(localStorage.getItem(i));
+      parsedInfo = JSON.parse( localStorage.getItem( i ) );
       parsedDate = parsedInfo.date;
       parsedTitle = parsedInfo.title;
       parsedDescription = parsedInfo.description;
       console.log( parsedDate, parsedTitle, parsedDescription );
 
-      $('.week-unit[id=' + i + ']').append
-        ('<div class="info-popup"><h4>' +
-        parsedDate + '</h4><h3>' +
-        parsedTitle + '</h3><p>' +
-        parsedDescription + '</p></div>');
+
     } else if ( i > weeksDiff) {
       return null;
     }
@@ -172,7 +194,7 @@ function checkDate( date, eventInfo ) {
   console.log( eventDateMS, birthdayMS, weeksDiff );
   localStorage.setItem( weeksDiff, JSON.stringify( eventInfo ) );
 
-  attachLifeEvent(weeksDiff, eventInfo);
+  getLifeEvent(weeksDiff, eventInfo);
 
   for( var i = 0; i < 5200; i++ ){
     if( weeksDiff === i ) {
@@ -294,7 +316,7 @@ function init () {
   displayPersonalInfo();
   eventSubmitListener();
   weekClickListener();
-  checkEventsInLS();
+  checkEventsInLocalStorage();
   // eventListener();
 }
 //Grid Page Scripts Start

@@ -263,9 +263,10 @@ label, input {
   #grid-page .add-event {
     margin-top: 20px; }
   #grid-page .event-info {
-    display: none;
-    color: #333;
-    background-color: #FFF; }
+    color: red;
+    background-color: #FFF;
+    margin-top: 20px;
+    padding: 5px; }
   #grid-page .red {
     background-color: red; }
   #grid-page .blue {
@@ -280,7 +281,7 @@ label, input {
     background-color: purple; }
   #grid-page #map {
     margin-top: 20px;
-    width: 200px;
+    width: 100%;
     height: 140px;
     background-color: #333; }
 
