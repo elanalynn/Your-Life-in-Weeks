@@ -87,6 +87,19 @@ function hoverEffect() {
   });
 }
 
+function checkEventsInLS() {
+
+  for ( var key in localStorage ) {
+    console.log ( key );
+    for (var i = 0; i < 5200; i++) {
+      if( key == i ){
+        console.log('eventChecker');
+        $( "#" + i ).addClass( 'red' );
+      }
+    }
+  }
+}
+
 //End init functions on grid page
 
 //get Form Data
@@ -102,20 +115,22 @@ function eventSubmitListener() {
 
 function weekClickListener() {
 
-//   for ( var i = 0; i < localStorage.length; i++ ){
-//     if( $(this[id=i] ===  ){
-//       $('#details-box').append(localStorage.getItem(localStorage.key(i)));
-//     }
-// }
-
   $( '.week-unit' ).click( function() {
-    if ($( this ).hasClass( 'blue' )){
-      $( this ).removeClass( 'blue' );
-      $( '.info-popup').hide();
-    } else {
-      $( this ).addClass( 'blue' );
-      //$( this ).children().last().show();
-      $( '.info-popup' ).show();
+    //var thisID = $(this).attr('id');
+    for ( var i = 0; i < localStorage.length; i++ ){
+      if( ($(this).attr('id')) === localStorage[i] ){
+        $('.event-info').empty();
+        $('.event-info').hide();
+        $('.event-info').append(localStorage.getItem(localStorage.key(i)));
+      }
+      // if ($( this ).hasClass( 'blue' )){
+      //   $( this ).removeClass( 'blue' );
+      //   //$( '.info-popup').hide();
+      // } else {
+      //   $( this ).addClass( 'blue' );
+      //   //$( this ).children().last().show();
+      //   //$( '.info-popup' ).show();
+      // }
     }
   });
 }
@@ -135,7 +150,7 @@ function attachLifeEvent(weeksDiff, eventInfo) {
       parsedDescription = parsedInfo.description;
       console.log( parsedDate, parsedTitle, parsedDescription );
 
-      $('.week-unit[id=' + i + ']').append //How do I place this in the 'details-box'?
+      $('.week-unit[id=' + i + ']').append
         ('<div class="info-popup"><h4>' +
         parsedDate + '</h4><h3>' +
         parsedTitle + '</h3><p>' +
@@ -279,6 +294,7 @@ function init () {
   displayPersonalInfo();
   eventSubmitListener();
   weekClickListener();
+  checkEventsInLS();
   // eventListener();
 }
 //Grid Page Scripts Start

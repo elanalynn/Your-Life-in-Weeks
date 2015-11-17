@@ -262,10 +262,8 @@ label, input {
     color: #090566; }
   #grid-page .add-event {
     margin-top: 20px; }
-  #grid-page .info-popup {
+  #grid-page .event-info {
     display: none;
-    z-index: 1000;
-    width: 200px;
     color: #333;
     background-color: #FFF; }
   #grid-page .red {
