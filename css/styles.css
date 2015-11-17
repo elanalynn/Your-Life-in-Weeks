@@ -246,24 +246,40 @@ label, input {
     margin-right: 10px;
     clear: left;
     float: left; }
-  #grid-page #desc-box {
+  #grid-page #details-box {
     width: 150px;
     height: auto;
     float: left;
     margin-top: 20px;
     background-color: #CCC; }
-    #grid-page #desc-box h4 {
+    #grid-page #details-box h4 {
       margin-top: 40px;
       color: #333; }
-    #grid-page #desc-box p {
+    #grid-page #details-box p {
       color: #333; }
   #grid-page .form-box {
     padding: 20px;
     color: #090566; }
   #grid-page .add-event {
     margin-top: 20px; }
+  #grid-page .info-popup {
+    display: none;
+    width: 200px;
+    height: 400px;
+    color: #333;
+    background-color: #FFF; }
+  #grid-page .red {
+    background-color: red; }
   #grid-page .blue {
-    background-color: #0f30e2; }
+    background-color: blue; }
+  #grid-page .yellow {
+    background-color: yellow; }
+  #grid-page .green {
+    background-color: green; }
+  #grid-page .orange {
+    background-color: orange; }
+  #grid-page .purple {
+    background-color: purple; }
   #grid-page #map {
     margin-top: 20px;
     width: 200px;

@@ -322,7 +322,7 @@ label, input {
     float: left;
   }
 
-  #desc-box {
+  #details-box {
     width: 150px;
     height: auto;
     float: left;
@@ -348,8 +348,36 @@ label, input {
     margin-top: 20px;
   }
 
+  .info-popup {
+   display: none;
+   width: 200px;
+   height: 400px;
+   color: #333;
+   background-color: #FFF;
+  }
+
+  .red {
+    background-color: red;
+  }
+
   .blue {
-    background-color: #0f30e2;
+    background-color: blue;
+  }
+
+  .yellow {
+    background-color: yellow;
+  }
+
+  .green {
+    background-color: green;
+  }
+
+  .orange {
+    background-color: orange;
+  }
+
+  .purple {
+    background-color: purple;
   }
 
   #map {

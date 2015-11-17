@@ -34,10 +34,12 @@ function setPersonalInfo() {
   localStorage.setItem( 'birthday', birthday );
 }
 
-$('#initial-submit').click(function() {
-  setPersonalInfo();
-  window.location = 'grid.html';
-});
+function initialSubmit() {
+  $('#initial-submit').click(function() {
+    setPersonalInfo();
+    window.location = 'grid.html';
+  });
+}
 
 //Index scripts end
 
@@ -65,8 +67,8 @@ function drawGrid() {
 }
 
 function displayPersonalInfo() {
-  $('#desc-box').prepend('<p> DOB: ' + localStorage.birthday + '</p>');
-  $('#desc-box').prepend('<h4>' + localStorage.username + '</h4>');
+  $('#details-box').prepend('<p> DOB: ' + localStorage.birthday + '</p>');
+  $('#details-box').prepend('<h4>' + localStorage.username + '</h4>');
 }
 
 function cursorToPointer() {
@@ -78,23 +80,77 @@ function cursorToPointer() {
   });
 }
 
+function hoverEffect() {
+  $( '.week-unit' ).hover(function() {
+    $( this ).fadeOut( 100 );
+    $( this ).fadeIn( 500 );
+  });
+}
+
 //End init functions on grid page
 
 //get Form Data
-
-// $(".add-event").submit(function(e) {
-//   e.preventDefault();
-//   e.stopPropagation();
-// });
 
 $( '#event-submit' ).click( function() {
   var address = $( '.event-address' ).val();
   //getAddress( address );
   setEventInfo();
-  window.location = 'grid.html';
   return address;
 
 });
+
+function weekClickListener() {
+  console.log( 'weekClickListener' );
+  $( '.week-unit' ).click( function() {
+    if ($( this ).hasClass( 'blue' )){
+      $( this ).removeClass( 'blue' );
+      $( '.info-popup').hide();
+    } else {
+      $( this ).addClass( 'blue' );
+      $( this ).children().last().show();
+      $( '.info-popup' ).show();
+    }
+  });
+}
+
+function attachEvent(weeksDiff, eventInfo) {
+
+  for (var i = 0; i < 5201; i++) {
+    var parsedInfo,
+        parsedDate,
+        parsedTitle,
+        parsedDescription;
+
+    if( i === weeksDiff ){
+      parsedInfo = JSON.parse(localStorage.getItem(i));
+      parsedDate = parsedInfo.date;
+      parsedTitle = parsedInfo.title;
+      parsedDescription = parsedInfo.description;
+      console.log( parsedDate, parsedTitle, parsedDescription );
+      $('.week-unit[id=' + i + ']').append //How do I place this in the 'details-box'?
+        ('<div class="info-popup"><h4>' +
+        parsedDate + '</h4><h3>' +
+        parsedTitle + '</h3><p>' +
+        parsedDescription + '</p></div>');
+    } else if ( i > weeksDiff) {
+      return null;
+    }
+  }
+
+}
+
+function checkDate(date, eventInfo) {
+  var birthdayMS = new Date(localStorage.getItem( 'birthday' )).getTime();
+  var eventDateMS = new Date(date).getTime();
+  var msToDayFactor = 86400000;
+  var daysInWeek = 7;
+  var weeksDiff = Math.ceil((eventDateMS - birthdayMS) / msToDayFactor / daysInWeek);
+
+  console.log(eventDateMS, birthdayMS, weeksDiff);
+  localStorage.setItem( weeksDiff, JSON.stringify( eventInfo ) );
+
+  attachEvent(weeksDiff, eventInfo);
+}
 
 function setEventInfo() {
 
@@ -104,63 +160,10 @@ function setEventInfo() {
   eventInfo.description = $( '.event-description' ).val();
   eventInfo.color = $( '.event-color' ).val();
   eventInfo.address = $( '.event-address' ).val();
-  localStorage.setItem( 'data', JSON.stringify( eventInfo ) );
+  localStorage.setItem( 'eventInfo', JSON.stringify( eventInfo ) );
 
-  checkDate( 'eventInfo.date' );
+  checkDate(eventInfo.date, eventInfo);
 
-}
-
-function checkDate( date ) {
-  var birthdayMS = new Date(localStorage.getItem( 'birthday' )).getTime();
-  var eventDateMS = new Date(date).getTime();
-
-  console.log(birthdayMS, eventDateMS);
-
-  //attachEvent();
-}
-
-function attachEvent(eventInfo) {
-  console.log(JSON.parse(localStorage.getItem( 'data' )));
-  var currentEventDate = JSON.parse(localStorage.getItem( 'data.date' ));
-  //console.log('eventInfo = ', eventInfo );
-  localStorage.setItem('currentEventDate', currentEventDate );
-
-//  for(var i = 0; i < 5201; i++){
-    // if( $( 'div[id="' + i + '"]' )) {
-    //   if( currentEventDate === $(this[data-date]).val()) {
-    //     console.log( 'HAPPY BIRTHDAY!' );
-    //   } else {
-    //     console.log('Grr');
-    //   }
-    // }
-  //}
-}
-
-function clickHandler(title, description) {
-  $( '.week-unit' ).click(function() {
-    if ($( this ).hasClass( 'blue' )){
-      $( this ).removeClass( 'blue' );
-      $( '#desc-box').remove('.event-info');
-      // $( '#desc-box').remove('.event-title');
-      // $( '#desc-box').remove('.event-description');
-      // $( '#desc-box').remove('.event-address');
-      // $( '#desc-box').remove('.event-color');
-    } else {
-      $( this ).addClass( 'blue' );
-      $( '#desc-box').append('.event-date');
-      $( '#desc-box').append('.event-title');
-      $( '#desc-box').append('.event-description');
-      $( '#desc-box').append('.event-address');
-      $( '#desc-box').append('.event-color');
-    }
-  });
-}
-
-function hoverEffect() {
-  $( '.week-unit' ).hover(function() {
-    $( this ).fadeOut( 100 );
-    $( this ).fadeIn( 500 );
-  });
 }
 
 // Map Functionality
@@ -232,8 +235,6 @@ function hoverEffect() {
 // });
 // }
 
-
-
 // function placePin( map, location ) {
 // var myLatLng = location;
 //
@@ -251,11 +252,15 @@ function hoverEffect() {
 //Map functions end
 
 function init () {
+  //Index initial functions
+  initialSubmit();
+
+  //Grid page initial functions
   drawGrid();
   cursorToPointer();
-  clickHandler();
   hoverEffect();
   displayPersonalInfo();
+  weekClickListener();
   // eventListener();
 }
 //Grid Page Scripts Start

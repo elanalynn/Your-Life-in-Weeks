@@ -68,16 +68,15 @@
         </header>
         <article id="weeks-grid">
         </article>
-        <div id="desc-box">
-          <!-- <p class="name-display"></p>
-          <p class="dob-display"></p> -->
+        <div id="details-box">
           <button type="button" class="btn btn-primary add-event" data-toggle="modal" data-target="#event-modal">
             Add an Event
           </button>
-          <div id="map">
-            Map goes here.
+          <div id="event-info">
+            <div id="map">
+              Map goes here.
+            </div>
           </div>
-
         </div><!-- /.details-box -->
       </main>
       <div class="modal fade" id="event-modal">
@@ -110,7 +109,7 @@
                 <p>Include city and state and country if not US.</P>
               </div>
               <div class="form-group">
-                <button type="button" class="btn btn-default" id="event-submit" name="event-submit" value="Submit">Submit</button>
+                <button type="button" id="event-submit" class="btn btn-default close"  data-dismiss="modal">Submit</button>
               </div>
             </form>
             <div class="modal-footer">
