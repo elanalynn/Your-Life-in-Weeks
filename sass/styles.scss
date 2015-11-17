@@ -348,12 +348,16 @@ label, input {
     margin-top: 20px;
   }
 
-  .event-title {
-    color: #038662;
-  }
-
   .blue {
     background-color: #0f30e2;
+  }
+
+  #map {
+    // display: none;
+    margin-top: 20px;
+    width: 200px;
+    height: 140px;
+    background-color: #333;
   }
 }
 /* End Grid Page Styles */

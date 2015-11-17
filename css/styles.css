@@ -262,9 +262,12 @@ label, input {
     color: #090566; }
   #grid-page .add-event {
     margin-top: 20px; }
-  #grid-page .event-title {
-    color: #038662; }
   #grid-page .blue {
     background-color: #0f30e2; }
+  #grid-page #map {
+    margin-top: 20px;
+    width: 200px;
+    height: 140px;
+    background-color: #333; }
 
 /* End Grid Page Styles */
