@@ -39,9 +39,16 @@ function initialSubmit() {
 } // Index scripts end
 
 // // Map Functionality
-function initMap() {
-  var map = new google.maps.Map( document.getElementById( 'map' ), {
-    center: {lat: -34.397, lng: 150.644},
+//function initMap() {
+  var map;
+  //console.log(google.maps.LatLng);
+  //return map;
+//}
+
+function initMap( location ) {
+  var loc = location || {lat:0, lng:0};
+  map = new google.maps.Map( document.getElementById( 'map' ), {
+    center: loc,
     zoom: 10,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
@@ -52,7 +59,7 @@ function initMap() {
 function adjustMapCenter( map, location ) {
   mapOptions = {
     center: location,
-    zoom: 15,
+    zoom: 10,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
@@ -66,6 +73,7 @@ function placePin( map, location ) {
       title: 'This is where it happened!'
     });
   console.log( marker.position );
+  console.log( marker.title );
   console.log( location );
 }
 
@@ -76,6 +84,7 @@ function getLatLng( map, address ) {
   deffered.done( function( data ) {
     localStorage.setItem( 'deffered', JSON.stringify(data) );
     placePin( map, data.results[0].geometry.location );
+    console.log(map);
     adjustMapCenter( map, data.results[0].geometry.location );
     console.log( 'Success', data );
   });
@@ -158,25 +167,25 @@ function weekClickListener() {
           parsedTitle = currentEvent.title;
           parsedDesc = currentEvent.description;
           parsedAddress = currentEvent.address;
-          console.log( currentEvent, parsedDate, parsedTitle, parsedDesc );
+          console.log( parsedDate, parsedTitle, parsedDesc, parsedAddress );
         }
       }
       $( '.event-info' ).append('<div class="event-info"><h4>' +
           parsedDate + '</h4><h3>' +
           parsedTitle + '</h3><p>' +
           parsedDesc + '</p><p>' +
-          parsedAddress + '</p></div>');
+          parsedAddress + '</p><div id="map"></div></div>');
     } else {
       $( '.event-info' ).append('Nothing happened this week.');
       $( '.event-info' ).append('<img src="../images/sad-cat.jpg">');
     }
-  });
+    console.log( parsedAddress );
+    initMap();
+    getLatLng( map, parsedAddress );
 
-    var map = initMap();
-    var location = getLatLng( map, parsedAddress );
-    //adjustMapCenter( map, location );
-    // console.log( parsedAddress );
     // console.log( location );
+    // adjustMapCenter( map, location );
+  });
 }
 
 function getLifeEvent(weeksDiff, eventInfo) {
@@ -244,7 +253,7 @@ function init () {
   eventSubmitListener();
   weekClickListener();
   checkEventsInLocalStorage();
-  initMap();
+  //initMap();
 }
 
 $(document).ready(init());

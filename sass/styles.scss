@@ -68,8 +68,6 @@ a:focus {
     outline: 0;
 }
 
-/* End nav styles */
-
 @media(min-width:768px) {
     .navbar-custom {
         padding: 20px 0;
@@ -87,6 +85,8 @@ a:focus {
         background: #000;
     }
 }
+
+/* End nav styles */
 
 .intro {
     display: table;
@@ -347,7 +347,6 @@ label, input {
   }
 
   .event-info {
-   //display: none;
    color: #333;
    background-color: #FFF;
    margin-top: 20px;

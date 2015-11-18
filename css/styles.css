@@ -52,7 +52,6 @@ a:focus {
 .navbar-custom .navbar-brand .navbar-toggle:active {
   outline: 0; }
 
-/* End nav styles */
 @media (min-width: 768px) {
   .navbar-custom {
     padding: 20px 0;
@@ -67,6 +66,7 @@ a:focus {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     background: #000; } }
 
+/* End nav styles */
 .intro {
   display: table;
   width: 100%;
