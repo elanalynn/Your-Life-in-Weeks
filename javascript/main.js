@@ -39,51 +39,51 @@ function initialSubmit() {
 } // Index scripts end
 
 // // Map Functionality
-// function initMap() {
-//   var map = new google.maps.Map( document.getElementById( 'map' ), {
-//     center: {lat: -34.397, lng: 150.644},
-//     zoom: 10,
-//     mapTypeId: google.maps.MapTypeId.ROADMAP
-//   });
-//   console.log(google.maps.LatLng);
-//   return map;
-// }
-//
-// function adjustMapCenter( map, location ) {
-//   mapOptions = {
-//     center: location,
-//     zoom: 15,
-//     mapTypeId: google.maps.MapTypeId.ROADMAP
-//   };
-//
-//   map.setOptions(mapOptions);
-// }
-//
-// function placePin( map, location ) {
-//   var marker = new google.maps.Marker({
-//       position: location,
-//       map: map,
-//       title: 'This is where it happened!'
-//     });
-//   console.log( marker.position );
-//   console.log( location );
-// }
-//
-// function getLatLng( map, address ) {
-//   var mapsAPI = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-//   var deffered = $.get( mapsAPI + address);
-//
-//   deffered.done( function( data ) {
-//     localStorage.setItem( 'deffered', JSON.stringify(data) );
-//     placePin( map, data.results[0].geometry.location );
-//     adjustMapCenter( map, data.results[0].geometry.location );
-//     console.log( 'Success', data );
-//   });
-//
-//   deffered.fail(function( data ) {
-//     console.log( 'Failed');
-//   });
-// } // End map functions
+function initMap() {
+  var map = new google.maps.Map( document.getElementById( 'map' ), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 10,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+  console.log(google.maps.LatLng);
+  return map;
+}
+
+function adjustMapCenter( map, location ) {
+  mapOptions = {
+    center: location,
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  map.setOptions(mapOptions);
+}
+
+function placePin( map, location ) {
+  var marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      title: 'This is where it happened!'
+    });
+  console.log( marker.position );
+  console.log( location );
+}
+
+function getLatLng( map, address ) {
+  var mapsAPI = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+  var deffered = $.get( mapsAPI + address);
+
+  deffered.done( function( data ) {
+    localStorage.setItem( 'deffered', JSON.stringify(data) );
+    placePin( map, data.results[0].geometry.location );
+    adjustMapCenter( map, data.results[0].geometry.location );
+    console.log( 'Success', data );
+  });
+
+  deffered.fail(function( data ) {
+    console.log( 'Failed');
+  });
+} // End map functions
 
 // Grid page scripts start
 function drawGrid() {
@@ -132,9 +132,7 @@ function checkEventsInLocalStorage() {
 
 function eventSubmitListener() {
   $( '#event-submit' ).click( function() {
-    //var address = $( '.event-address' ).val();
     setEventInfo();
-    //return address;
   });
 }
 
@@ -173,7 +171,9 @@ function weekClickListener() {
       $( '.event-info' ).append('<img src="../images/sad-cat.jpg">');
     }
   });
-    //location = getLatLng( map, parsedAddress );
+
+    var map = initMap();
+    var location = getLatLng( map, parsedAddress );
     //adjustMapCenter( map, location );
     // console.log( parsedAddress );
     // console.log( location );
@@ -244,7 +244,7 @@ function init () {
   eventSubmitListener();
   weekClickListener();
   checkEventsInLocalStorage();
-  //initMap();
+  initMap();
 }
 
 $(document).ready(init());
