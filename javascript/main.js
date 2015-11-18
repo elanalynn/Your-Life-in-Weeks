@@ -135,7 +135,8 @@ function weekClickListener() {
       parsedDate,
       parsedTitle,
       parsedDesc,
-      parsedAddress;
+      parsedAddress,
+      parsedColor;
 
   $( '.week-unit' ).click( function() {
     $( '.event-info' ).empty();
@@ -151,7 +152,7 @@ function weekClickListener() {
           parsedTitle = currentEvent.title;
           parsedDesc = currentEvent.description;
           parsedAddress = currentEvent.address;
-          console.log( parsedDate, parsedTitle, parsedDesc, parsedAddress );
+          parsedColor = currentEvent.color;
         }
       }
       $( '.event-info' ).append('<div class="event-info"><h5>' +
@@ -207,7 +208,7 @@ function checkDate( date, eventInfo ) {
   for( var i = 0; i < 5200; i++ ){
     if( weeksDiff === i ) {
       console.log( 'eventLogged' );
-      $( "#" + i ).addClass( 'color' );
+      $( "#" + i ).css( 'background-color', eventInfo.color );
     } else if ( weeksDiff < i ) {
       return null;
     }

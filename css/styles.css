@@ -202,8 +202,10 @@ label, input {
 /* End Index Styles */
 /* Grid Page Styles */
 #grid-page {
-  background: #bbc2d6; }
+  background: #f1eed9; }
   #grid-page h1 {
+    font-family: 'Satisfy', cursive;
+    color: #333;
     margin-top: 200px;
     text-align: center; }
   #grid-page main {
