@@ -115,10 +115,14 @@ function cursorToPointer() {
 }
 
 function checkEventsInLocalStorage() {
+  var savedEvent;
   for ( var key in localStorage ) {
     for (var i = 0; i < 5200; i++) {
       if( key == i ){
+        savedEvent = JSON.parse(localStorage.getItem(key));
+        console.log(key);
         $( "#" + i ).addClass( 'color' );
+        $( "#" + i ).css( 'background-color', savedEvent.color );
       }
     }
   }
@@ -194,6 +198,17 @@ function getLifeEvent(weeksDiff, eventInfo) {
   }
 }
 
+function fillSquare( weeksDiff, eventInfo ) {
+  for( var i = 0; i < 5200; i++ ){
+    if( weeksDiff === i ) {
+      console.log( 'eventLogged' );
+      $( "#" + i ).addClass( 'color' ).css( 'background-color', eventInfo.color );
+    } else if ( weeksDiff < i ) {
+      return null;
+    }
+  }
+}
+
 function checkDate( date, eventInfo ) {
   var birthdayMS = new Date( localStorage.getItem( 'birthday' ) ).getTime();
   var eventDateMS = new Date( date ).getTime();
@@ -202,17 +217,8 @@ function checkDate( date, eventInfo ) {
   var weeksDiff = Math.ceil( ( eventDateMS - birthdayMS ) / msToDayFactor / daysInWeek );
 
   localStorage.setItem( weeksDiff, JSON.stringify( eventInfo ) );
-
   getLifeEvent( weeksDiff, eventInfo );
-
-  for( var i = 0; i < 5200; i++ ){
-    if( weeksDiff === i ) {
-      console.log( 'eventLogged' );
-      $( "#" + i ).css( 'background-color', eventInfo.color );
-    } else if ( weeksDiff < i ) {
-      return null;
-    }
-  }
+  fillSquare( weeksDiff, eventInfo );
 }
 
 function setEventInfo() {

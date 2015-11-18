@@ -259,7 +259,7 @@ label, input {
     #grid-page .event-info img {
       width: 100%; }
   #grid-page .color {
-    background-color: red; }
+    background-color: #000; }
   #grid-page #map {
     margin-top: 20px;
     width: 100%;
