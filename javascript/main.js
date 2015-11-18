@@ -1,5 +1,4 @@
-//Splash Page Scripts Start
-
+// Index page scripts start
 // jQuery to collapse the navbar on scroll
 $(window).scroll(function() {
     if ($( '.navbar' ).offset().top > 50 ) {
@@ -9,7 +8,7 @@ $(window).scroll(function() {
     }
 });
 
-// jQuery for page scrolling feature - requires jQuery Easing plugin
+// jQuery for page scrolling feature (requires jQuery Easing plugin)
 $( function() {
     $( 'a.page-scroll' ).bind( 'click', function( event ) {
         var $anchor = $(this);
@@ -20,12 +19,10 @@ $( function() {
     });
 });
 
-// Closes the Responsive Menu on Menu Item Click
+// Close responsive menu on menu item click
 $( '.navbar-collapse ul li a' ).click( function() {
     $( '.navbar-toggle:visible' ).click();
 });
-
-//Button in initial-modal to got to grid page
 
 function setPersonalInfo() {
   var username = $( '.username' ).val();
@@ -39,19 +36,62 @@ function initialSubmit() {
     setPersonalInfo();
     window.location = 'grid.html';
   });
-}
+} // Index scripts end
 
-//Index scripts end
+// // Map Functionality
+// function initMap() {
+//   var map = new google.maps.Map( document.getElementById( 'map' ), {
+//     center: {lat: -34.397, lng: 150.644},
+//     zoom: 10,
+//     mapTypeId: google.maps.MapTypeId.ROADMAP
+//   });
+//   console.log(google.maps.LatLng);
+//   return map;
+// }
+//
+// function adjustMapCenter( map, location ) {
+//   mapOptions = {
+//     center: location,
+//     zoom: 15,
+//     mapTypeId: google.maps.MapTypeId.ROADMAP
+//   };
+//
+//   map.setOptions(mapOptions);
+// }
+//
+// function placePin( map, location ) {
+//   var marker = new google.maps.Marker({
+//       position: location,
+//       map: map,
+//       title: 'This is where it happened!'
+//     });
+//   console.log( marker.position );
+//   console.log( location );
+// }
+//
+// function getLatLng( map, address ) {
+//   var mapsAPI = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+//   var deffered = $.get( mapsAPI + address);
+//
+//   deffered.done( function( data ) {
+//     localStorage.setItem( 'deffered', JSON.stringify(data) );
+//     placePin( map, data.results[0].geometry.location );
+//     adjustMapCenter( map, data.results[0].geometry.location );
+//     console.log( 'Success', data );
+//   });
+//
+//   deffered.fail(function( data ) {
+//     console.log( 'Failed');
+//   });
+// } // End map functions
 
-//Grid page scripts start
-
+// Grid page scripts start
 function drawGrid() {
   var unitCounter = 1,
       dateCounter = new Date(localStorage.getItem( 'birthday' )),
       unit,
       rowNumber,
       rowCounter = 1;
-
       dateCounter.setDate( dateCounter.getDate() + 1 );
 
   for(var i = 0; i < 100; i++) {
@@ -80,13 +120,6 @@ function cursorToPointer() {
   });
 }
 
-// function hoverEffect() {
-//   $( '.week-unit' ).hover( function() {
-//     $( this ).fadeOut( 100 );
-//     $( this ).fadeIn( 500 );
-//   });
-// }
-
 function checkEventsInLocalStorage() {
   for ( var key in localStorage ) {
     for (var i = 0; i < 5200; i++) {
@@ -95,11 +128,7 @@ function checkEventsInLocalStorage() {
       }
     }
   }
-}
-
-//End init functions on grid page
-
-//get Form Data
+} //End grid page init functions
 
 function eventSubmitListener() {
   $( '#event-submit' ).click( function() {
@@ -110,20 +139,26 @@ function eventSubmitListener() {
 }
 
 function weekClickListener() {
-  var currentEvent = {},
+  var currentEvent,
       parsedDate,
       parsedTitle,
       parsedDesc,
       parsedAddress;
 
   $( '.week-unit' ).click( function() {
+    $( '.event-info' ).empty();
 
     // Check if the week has an associated event
     if ($( this ).hasClass( 'color' )){
-      console.log('Something happened this week');
+      $( '.event-info' ).append('Something happened this week');
     } else {
-      console.log('Nothing happened this week.');
+      $( '.event-info' ).append('Nothing happened this week.');
     }
+
+    //location = getLatLng( map, parsedAddress );
+    //adjustMapCenter( map, location );
+    // console.log( parsedAddress );
+    // console.log( location );
 
     // Loop through localStorage to compare keys to this
     for ( var key in localStorage ) {
@@ -134,35 +169,20 @@ function weekClickListener() {
         parsedTitle = currentEvent.title;
         parsedDesc = currentEvent.description;
         parsedAddress = currentEvent.address;
-
         //console.log( currentEvent, parsedDate, parsedTitle, parsedDesc );
       }
     }
 
-    if ($( '.event-info' ).is( ':visible' )) {
-      // Clear out .event-info if there is anything in it
-      $( '.event-info' ).empty();
-      $( '.event-info' ).hide();
-
-    } else {
-      // Show .event-info if not visible and append info and map
-      var map = initMap();
-      newLocation = getLatLng( map, parsedAddress );
-      console.log( parsedAddress );
-
-      $( '.event-info' ).show()
-                        .append('<div class="event-info"><h4>' +
-                          parsedDate + '</h4><h3>' +
-                          parsedTitle + '</h3><p>' +
-                          parsedDesc + '</p><p>' +
-                          parsedAddress + '</p></div>');
-
-    }
+    $( '.event-info' ).show()
+      .append('<div class="event-info"><h4>' +
+        parsedDate + '</h4><h3>' +
+        parsedTitle + '</h3><p>' +
+        parsedDesc + '</p><p>' +
+        parsedAddress + '</p></div>');
   });
 }
 
 function getLifeEvent(weeksDiff, eventInfo) {
-
   for (var i = 0; i < 5201; i++) {
     var parsedInfo,
         parsedDate,
@@ -175,13 +195,10 @@ function getLifeEvent(weeksDiff, eventInfo) {
       parsedTitle = parsedInfo.title;
       parsedDescription = parsedInfo.description;
       console.log( parsedDate, parsedTitle, parsedDescription );
-
-
     } else if ( i > weeksDiff) {
       return null;
     }
   }
-
 }
 
 function checkDate( date, eventInfo ) {
@@ -191,7 +208,6 @@ function checkDate( date, eventInfo ) {
   var daysInWeek = 7;
   var weeksDiff = Math.ceil( ( eventDateMS - birthdayMS ) / msToDayFactor / daysInWeek );
 
-  console.log( eventDateMS, birthdayMS, weeksDiff );
   localStorage.setItem( weeksDiff, JSON.stringify( eventInfo ) );
 
   getLifeEvent(weeksDiff, eventInfo);
@@ -199,7 +215,7 @@ function checkDate( date, eventInfo ) {
   for( var i = 0; i < 5200; i++ ){
     if( weeksDiff === i ) {
       console.log('eventLogged');
-      $( "#" + i ).addClass( 'red' );
+      $( "#" + i ).addClass( 'color' );
     } else if ( weeksDiff < i ) {
       return null;
     }
@@ -207,7 +223,6 @@ function checkDate( date, eventInfo ) {
 }
 
 function setEventInfo() {
-
   var eventInfo = {};
   eventInfo.date = $( '.event-date' ).val();
   eventInfo.title = $( '.event-title' ).val();
@@ -217,78 +232,20 @@ function setEventInfo() {
   localStorage.setItem( 'eventInfo', JSON.stringify( eventInfo ) );
 
   checkDate( eventInfo.date, eventInfo );
-
 }
-
-// Map Functionality
-
-function initMap() {
-  var map = new google.maps.Map( document.getElementById( 'map' ), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 10,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-  console.log(google.maps.LatLng);
-  return map;
-}
-
-function adjustMap( map, location ) {
-  var marker = new google.maps.Marker({
-      position: location,
-      map: map,
-      title: 'This is where it happened!'
-    });
-  console.log( marker.position );
-  console.log( location );
-}
-
-function placePin( map, location ) {
-  var marker = new google.maps.Marker({
-      position: location,
-      map: map,
-      title: 'This is where it happened!'
-    });
-  console.log( marker.position );
-  console.log( location );
-}
-
-function getLatLng( map, address ) {
-
-  console.log( address + " gotAddress");
-
-  var mapsAPI = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-
-  var deffered = $.get( mapsAPI + address);
-
-  deffered.done( function( data ) {
-    localStorage.setItem( 'deffered', JSON.stringify(data) );
-    placePin( map, data.results[0].geometry.location );
-    adjustMapCenter( map, data.results[0].geometry.location );
-    console.log( data );
-  });
-
-  deffered.fail(function( data ) {
-    console.log( 'Failed');
-  });
-}
-
-//Map functions end
 
 function init () {
-  //Index initial functions
+  //Index initial function invocations
   initialSubmit();
 
-  //Grid page initial functions
+  //Grid page initial function invocations
   drawGrid();
   cursorToPointer();
-  //hoverEffect();
   displayPersonalInfo();
   eventSubmitListener();
   weekClickListener();
   checkEventsInLocalStorage();
-  initMap();
+  //initMap();
 }
-//Grid Page Scripts Start
 
-//Generic Ready Function
 $(document).ready(init());
