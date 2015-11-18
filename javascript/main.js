@@ -132,9 +132,9 @@ function checkEventsInLocalStorage() {
 
 function eventSubmitListener() {
   $( '#event-submit' ).click( function() {
-    var address = $( '.event-address' ).val();
+    //var address = $( '.event-address' ).val();
     setEventInfo();
-    return address;
+    //return address;
   });
 }
 
@@ -151,35 +151,32 @@ function weekClickListener() {
     // Check if the week has an associated event
     if ($( this ).hasClass( 'color' )){
       $( '.event-info' ).append('Something happened this week');
+      // Loop through localStorage to compare keys to this
+      for ( var key in localStorage ) {
+        if ( $( this ).attr( 'id' ) == key ) {
+          // Assign variables to display
+          currentEvent = JSON.parse( localStorage.getItem( key ) );
+          parsedDate = currentEvent.date;
+          parsedTitle = currentEvent.title;
+          parsedDesc = currentEvent.description;
+          parsedAddress = currentEvent.address;
+          console.log( currentEvent, parsedDate, parsedTitle, parsedDesc );
+        }
+      }
+      $( '.event-info' ).append('<div class="event-info"><h4>' +
+          parsedDate + '</h4><h3>' +
+          parsedTitle + '</h3><p>' +
+          parsedDesc + '</p><p>' +
+          parsedAddress + '</p></div>');
     } else {
       $( '.event-info' ).append('Nothing happened this week.');
+      $( '.event-info' ).append('<img src="../images/sad-cat.jpg">');
     }
-
+  });
     //location = getLatLng( map, parsedAddress );
     //adjustMapCenter( map, location );
     // console.log( parsedAddress );
     // console.log( location );
-
-    // Loop through localStorage to compare keys to this
-    for ( var key in localStorage ) {
-      if ( $( this ).attr( 'id' ) == key ) {
-        // Assign variables to display
-        currentEvent = JSON.parse( localStorage.getItem( key ) );
-        parsedDate = currentEvent.date;
-        parsedTitle = currentEvent.title;
-        parsedDesc = currentEvent.description;
-        parsedAddress = currentEvent.address;
-        //console.log( currentEvent, parsedDate, parsedTitle, parsedDesc );
-      }
-    }
-
-    $( '.event-info' ).show()
-      .append('<div class="event-info"><h4>' +
-        parsedDate + '</h4><h3>' +
-        parsedTitle + '</h3><p>' +
-        parsedDesc + '</p><p>' +
-        parsedAddress + '</p></div>');
-  });
 }
 
 function getLifeEvent(weeksDiff, eventInfo) {
@@ -187,13 +184,15 @@ function getLifeEvent(weeksDiff, eventInfo) {
     var parsedInfo,
         parsedDate,
         parsedTitle,
-        parsedDescription;
+        parsedDescription,
+        parsedAddress;
 
     if( i === weeksDiff ){
       parsedInfo = JSON.parse( localStorage.getItem( i ) );
       parsedDate = parsedInfo.date;
       parsedTitle = parsedInfo.title;
       parsedDescription = parsedInfo.description;
+      parsedAddress = parsedInfo.address;
       console.log( parsedDate, parsedTitle, parsedDescription );
     } else if ( i > weeksDiff) {
       return null;
@@ -210,11 +209,11 @@ function checkDate( date, eventInfo ) {
 
   localStorage.setItem( weeksDiff, JSON.stringify( eventInfo ) );
 
-  getLifeEvent(weeksDiff, eventInfo);
+  getLifeEvent( weeksDiff, eventInfo );
 
   for( var i = 0; i < 5200; i++ ){
     if( weeksDiff === i ) {
-      console.log('eventLogged');
+      console.log( 'eventLogged' );
       $( "#" + i ).addClass( 'color' );
     } else if ( weeksDiff < i ) {
       return null;
