@@ -8,17 +8,6 @@ $(window).scroll(function() {
     }
 });
 
-// jQuery for page scrolling feature (requires jQuery Easing plugin)
-$( function() {
-    $( 'a.page-scroll' ).bind( 'click', function( event ) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
-
 // Close responsive menu on menu item click
 $( '.navbar-collapse ul li a' ).click( function() {
     $( '.navbar-toggle:visible' ).click();
@@ -38,12 +27,8 @@ function initialSubmit() {
   });
 } // Index scripts end
 
-// // Map Functionality
-//function initMap() {
-  var map;
-  //console.log(google.maps.LatLng);
-  //return map;
-//}
+// Map Functionality
+var map;
 
 function initMap( location ) {
   var loc = location || {lat:0, lng:0};
@@ -59,7 +44,7 @@ function initMap( location ) {
 function adjustMapCenter( map, location ) {
   mapOptions = {
     center: location,
-    zoom: 10,
+    zoom: 12,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
@@ -157,7 +142,6 @@ function weekClickListener() {
 
     // Check if the week has an associated event
     if ($( this ).hasClass( 'color' )){
-      $( '.event-info' ).append('Something happened this week');
       // Loop through localStorage to compare keys to this
       for ( var key in localStorage ) {
         if ( $( this ).attr( 'id' ) == key ) {
@@ -170,13 +154,13 @@ function weekClickListener() {
           console.log( parsedDate, parsedTitle, parsedDesc, parsedAddress );
         }
       }
-      $( '.event-info' ).append('<div class="event-info"><h4>' +
-          parsedDate + '</h4><h3>' +
-          parsedTitle + '</h3><p>' +
+      $( '.event-info' ).append('<div class="event-info"><h5>' +
+          parsedDate + '</h5><h4>' +
+          parsedTitle + '</h4><p>' +
           parsedDesc + '</p><p>' +
           parsedAddress + '</p><div id="map"></div></div>');
     } else {
-      $( '.event-info' ).append('Nothing happened this week.');
+      $( '.event-info' ).append('No events this week.');
       $( '.event-info' ).append('<img src="../images/sad-cat.jpg">');
     }
     console.log( parsedAddress );

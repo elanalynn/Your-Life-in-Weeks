@@ -13,22 +13,6 @@ html {
   height: 100%;
 }
 
-h1 {
-  margin: 0 0 35px;
-  font-size: 60px;
-  color: #333;
-  font-family: 'Satisfy', cursive;
-  text-shadow: 0 0 2px #ede4d2;
-
-  h2 {
-      color: #FFF;
-  }
-
-  h3 {
-      color: #333;
-  }
-}
-
 a {
     color: #06C;
     -webkit-transition: all .2s ease-in-out;
@@ -40,10 +24,6 @@ a:hover,
 a:focus {
     text-decoration: none;
     color: #333;
-}
-
-.light {
-    font-weight: 400;
 }
 
 /* Nav styles */
@@ -94,6 +74,7 @@ a:focus {
     height: auto;
     padding: 100px 0;
     text-align: center;
+    font-family: 'Satisfy', cursive;
     background: url(../images/make-the-best.jpg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
@@ -108,11 +89,12 @@ a:focus {
 }
 
 .intro .intro-body .brand-heading {
-    font-size: 40px;
+  color: #333;
+  font-size: 4em;
 }
 
 .intro .intro-body .intro-text {
-    font-size: 18px;
+    font-size: 2em;
 }
 
 @media(min-width:768px) {
@@ -279,7 +261,7 @@ label, input {
 /* Grid Page Styles */
 
 #grid-page {
-  background-color: #bbc2d6;
+  background: #bbc2d6;
 
   h1 {
     margin-top: 200px;
@@ -347,14 +329,16 @@ label, input {
   }
 
   .event-info {
-   color: #333;
-   background-color: #FFF;
+   color: #FFF;
+   background-color: #333;
    margin-top: 20px;
    padding: 5px;
+   border-radius: 10px;
 
    img {
-     width: 120px;
-     margin: 10px auto;
+     width: 100%;
+    // display: flex;
+    // align-items: center;
    }
   }
 
