@@ -333,6 +333,12 @@ label, input {
   .form-box {
     padding: 20px;
     color: #090566;
+
+    .btn {
+      background-color: #2a4abe;
+      color: #FFF;
+      padding: 10px;
+    }
   }
 
   .add-event {
@@ -347,29 +353,29 @@ label, input {
    padding: 5px;
   }
 
-  .red {
+  .color {
     background-color: red;
   }
 
-  .blue {
-    background-color: blue;
-  }
-
-  .yellow {
-    background-color: yellow;
-  }
-
-  .green {
-    background-color: green;
-  }
-
-  .orange {
-    background-color: orange;
-  }
-
-  .purple {
-    background-color: purple;
-  }
+  // .blue {
+  //   background-color: blue;
+  // }
+  //
+  // .yellow {
+  //   background-color: yellow;
+  // }
+  //
+  // .green {
+  //   background-color: green;
+  // }
+  //
+  // .orange {
+  //   background-color: orange;
+  // }
+  //
+  // .purple {
+  //   background-color: purple;
+  // }
 
   #map {
     margin-top: 20px;

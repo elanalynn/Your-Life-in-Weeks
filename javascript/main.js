@@ -80,21 +80,18 @@ function cursorToPointer() {
   });
 }
 
-function hoverEffect() {
-  $( '.week-unit' ).hover( function() {
-    $( this ).fadeOut( 100 );
-    $( this ).fadeIn( 500 );
-  });
-}
+// function hoverEffect() {
+//   $( '.week-unit' ).hover( function() {
+//     $( this ).fadeOut( 100 );
+//     $( this ).fadeIn( 500 );
+//   });
+// }
 
 function checkEventsInLocalStorage() {
-
   for ( var key in localStorage ) {
-    console.log ( key );
     for (var i = 0; i < 5200; i++) {
       if( key == i ){
-        console.log('eventChecker');
-        $( "#" + i ).addClass( 'red' );
+        $( "#" + i ).addClass( 'color' );
       }
     }
   }
@@ -107,7 +104,6 @@ function checkEventsInLocalStorage() {
 function eventSubmitListener() {
   $( '#event-submit' ).click( function() {
     var address = $( '.event-address' ).val();
-    //getAddress( address );
     setEventInfo();
     return address;
   });
@@ -117,15 +113,14 @@ function weekClickListener() {
   var currentEvent = {},
       parsedDate,
       parsedTitle,
-      parsedDesc;
+      parsedDesc,
+      parsedAddress;
 
   $( '.week-unit' ).click( function() {
 
     // Check if the week has an associated event
-    if ($( this ).hasClass( 'red' )){
+    if ($( this ).hasClass( 'color' )){
       console.log('Something happened this week');
-    } else if ( ( $( this ).attr( 'id' ) ) > key1) {
-      console.log('Stop.');
     } else {
       console.log('Nothing happened this week.');
     }
@@ -138,26 +133,31 @@ function weekClickListener() {
         parsedDate = currentEvent.date;
         parsedTitle = currentEvent.title;
         parsedDesc = currentEvent.description;
+        parsedAddress = currentEvent.address;
+
+        //console.log( currentEvent, parsedDate, parsedTitle, parsedDesc );
+      }
     }
-  }
 
-    console.log( currentEvent, parsedDate, parsedTitle, parsedDesc );
-    console.log(this);
-    console.log( key );
+    if ($( '.event-info' ).is( ':visible' )) {
+      // Clear out .event-info if there is anything in it
+      $( '.event-info' ).empty();
+      $( '.event-info' ).hide();
 
-    // Clear out .event-info if there is anything in it and re-show it
-    $('.event-info').empty();
-    $('.event-info').hide();
-    $('.event-info').append( currentEvent );
-    $('.event-info').show();
+    } else {
+      // Show .event-info if not visible and append info and map
+      var map = initMap();
+      newLocation = getLatLng( map, parsedAddress );
+      console.log( parsedAddress );
 
-    // Append info to .event-info
-    $( '.event-info' ).append
-      ('<div class="event-info"><h4>' +
-      parsedDate + '</h4><h3>' +
-      parsedTitle + '</h3><p>' +
-      parsedDesc + '</p></div>');
+      $( '.event-info' ).show()
+                        .append('<div class="event-info"><h4>' +
+                          parsedDate + '</h4><h3>' +
+                          parsedTitle + '</h3><p>' +
+                          parsedDesc + '</p><p>' +
+                          parsedAddress + '</p></div>');
 
+    }
   });
 }
 
@@ -216,92 +216,61 @@ function setEventInfo() {
   eventInfo.address = $( '.event-address' ).val();
   localStorage.setItem( 'eventInfo', JSON.stringify( eventInfo ) );
 
-  checkDate(eventInfo.date, eventInfo);
+  checkDate( eventInfo.date, eventInfo );
 
 }
 
 // Map Functionality
 
-//   var map = new google.maps.Map( document.getElementById( 'map' ), {
-//     center: { lat: 39.7675, lng: -105.0200 },
-//     zoom: 15,
-//     mapTypeId: google.maps.MapTypeId.ROADMAP
-//   });
-//
-//   console.log(google.maps.LatLng);
-//
-// function eventListener() {
-//
-//   $( '#event-submit' ).click( function() {
-//     var address = $( '.event-address' ).val();
-//     getAddress( address );
-//     //getAddressAddPin( address );
-//   });
-// }
-//
-// function getAddress( address ) {
-//
-//   console.log( address + " gotAddressAgain");
-//
-//   var mapsAPI = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-//
-//   var defferedMap = $.get( mapsAPI + address);
-//
-//   defferedMap.done(function( data ) {
-//     localStorage.setItem( 'defferedMap', JSON.stringify(data) );
-//     adjustMapCenter(map, data.results[0].geometry.location);
-//     console.log( data );
-//   });
-//
-//   defferedMap.fail(function( data ) {
-//     console.log( 'Failed');
-//   });
-// }
-//
-// function adjustMapCenter( map, location ) {
-//   var myLatLng = location;
-//
-//   var mapOptions = {
-//     center: myLatLng,
-//     zoom: 15,
-//     mapTypeId: google.maps.MapTypeId.ROADMAP
-//   };
-//
-//   map.setOptions(mapOptions);
-// }
+function initMap() {
+  var map = new google.maps.Map( document.getElementById( 'map' ), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 10,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+  console.log(google.maps.LatLng);
+  return map;
+}
 
-// function getAddressAddPin( address ) {
-//
-//   console.log( address );
-//
-//   var mapsAPI = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-//
-//   var defferedPin = $.get( mapsAPI + address);
-//
-//   defferedPin.done(function( data ) {
-//     localStorage.setItem( 'deferredPin', JSON.stringify(data) );
-//     placePin(map, data.results[0].geometry.location);
-//     console.log( data );
-// });
-//
-// defferedPin.fail(function( data ) {
-//   console.log( 'Failed');
-// });
-// }
+function adjustMap( map, location ) {
+  var marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      title: 'This is where it happened!'
+    });
+  console.log( marker.position );
+  console.log( location );
+}
 
-// function placePin( map, location ) {
-// var myLatLng = location;
-//
-// var marker = new google.maps.Marker({
-//     position: myLatLng,
-//     map: map,
-//     title: 'This is where it happened'
-//   });
-//
-// console.log( marker.position );
-// console.log( myLatLng );
-// console.log( marker.title );
-// }
+function placePin( map, location ) {
+  var marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      title: 'This is where it happened!'
+    });
+  console.log( marker.position );
+  console.log( location );
+}
+
+function getLatLng( map, address ) {
+
+  console.log( address + " gotAddress");
+
+  var mapsAPI = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+
+  var deffered = $.get( mapsAPI + address);
+
+  deffered.done( function( data ) {
+    localStorage.setItem( 'deffered', JSON.stringify(data) );
+    placePin( map, data.results[0].geometry.location );
+    adjustMapCenter( map, data.results[0].geometry.location );
+    console.log( data );
+  });
+
+  deffered.fail(function( data ) {
+    console.log( 'Failed');
+  });
+}
 
 //Map functions end
 
@@ -312,12 +281,12 @@ function init () {
   //Grid page initial functions
   drawGrid();
   cursorToPointer();
-  hoverEffect();
+  //hoverEffect();
   displayPersonalInfo();
   eventSubmitListener();
   weekClickListener();
   checkEventsInLocalStorage();
-  // eventListener();
+  initMap();
 }
 //Grid Page Scripts Start
 

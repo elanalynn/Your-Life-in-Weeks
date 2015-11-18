@@ -255,6 +255,10 @@ label, input {
   #grid-page .form-box {
     padding: 20px;
     color: #090566; }
+    #grid-page .form-box .btn {
+      background-color: #2a4abe;
+      color: #FFF;
+      padding: 10px; }
   #grid-page .add-event {
     margin-top: 20px; }
   #grid-page .event-info {
@@ -262,18 +266,8 @@ label, input {
     background-color: #FFF;
     margin-top: 20px;
     padding: 5px; }
-  #grid-page .red {
+  #grid-page .color {
     background-color: red; }
-  #grid-page .blue {
-    background-color: blue; }
-  #grid-page .yellow {
-    background-color: yellow; }
-  #grid-page .green {
-    background-color: green; }
-  #grid-page .orange {
-    background-color: orange; }
-  #grid-page .purple {
-    background-color: purple; }
   #grid-page #map {
     margin-top: 20px;
     width: 100%;
