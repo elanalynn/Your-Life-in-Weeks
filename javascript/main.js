@@ -32,7 +32,7 @@ function setPersonalInfo() {
 }
 
 function initialSubmit() {
-  $('#initial-submit').click(function() {
+  $('.initial-submit').click(function() {
     setPersonalInfo();
     window.location = 'grid.html';
   });
@@ -142,6 +142,7 @@ function checkEventsInLocalStorage() {
 function eventSubmitListener() {
   $( '#event-submit' ).click( function() {
     setEventInfo();
+    validateForm();
   });
 }
 
@@ -182,9 +183,6 @@ function weekClickListener() {
     console.log( parsedAddress );
     initMap();
     getLatLng( map, parsedAddress );
-
-    // console.log( location );
-    // adjustMapCenter( map, location );
   });
 }
 
@@ -244,6 +242,20 @@ function setEventInfo() {
   checkDate( eventInfo.date, eventInfo );
 }
 
+// Form validation
+function validateForm() {
+  var temp = $('.event-title').val();
+  var tempLength = $('.event-title').val().length;
+
+  console.log( temp );
+  console.log( tempLength );
+
+  if( tempLength < 3 ) {
+    console.log('event title is too short');
+    $('.event-title').append('<p>Your name longer than that!</p>');
+  }
+}
+
 function init () {
   //Index initial function invocations
   initialSubmit();
@@ -255,7 +267,6 @@ function init () {
   eventSubmitListener();
   weekClickListener();
   checkEventsInLocalStorage();
-  //initMap();
 }
 
 $(document).ready(init());
