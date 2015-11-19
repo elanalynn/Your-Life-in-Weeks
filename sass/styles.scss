@@ -84,8 +84,9 @@ a:focus {
 }
 
 .intro .intro-body {
-    display: table-cell;
-    vertical-align: middle;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .intro .intro-body .brand-heading {
@@ -104,8 +105,10 @@ a:focus {
         padding: 0;
     }
 
-    .intro .intro-body .intro-text {
-        font-size: 26px;
+    .intro .intro-body {
+      margin-top: 250px;
+      display: flex;
+      align-items: center;
     }
 }
 
@@ -119,8 +122,6 @@ a:focus {
     font-size: 40px;
     color: #fff;
     background: 0 0;
-    -webkit-transition: background .3s ease-in-out;
-    -moz-transition: background .3s ease-in-out;
     transition: background .3s ease-in-out;
 }
 
@@ -160,7 +161,7 @@ a:focus {
 
 }
 
-@media(min-width:767px) {
+@media(min-width:768px) {
     .content-section {
         padding-top: 250px;
     }
@@ -330,7 +331,7 @@ label, input {
   .modal-footer {
     border-top: none;
   }
-  
+
   .event-info {
    color: #FFF;
    background-color: #333;

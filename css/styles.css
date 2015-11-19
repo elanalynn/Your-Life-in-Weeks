@@ -68,8 +68,9 @@ a:focus {
   -o-background-size: cover; }
 
 .intro .intro-body {
-  display: table-cell;
-  vertical-align: middle; }
+  margin-top: 20px;
+  display: flex;
+  align-items: center; }
 
 .intro .intro-body .brand-heading {
   color: #333;
@@ -83,8 +84,10 @@ a:focus {
   .intro {
     height: 100%;
     padding: 0; }
-  .intro .intro-body .intro-text {
-    font-size: 26px; } }
+  .intro .intro-body {
+    margin-top: 250px;
+    display: flex;
+    align-items: center; } }
 
 .btn-circle {
   width: 70px;
@@ -96,8 +99,6 @@ a:focus {
   font-size: 40px;
   color: #fff;
   background: 0 0;
-  -webkit-transition: background .3s ease-in-out;
-  -moz-transition: background .3s ease-in-out;
   transition: background .3s ease-in-out; }
 
 .btn-circle:hover,
@@ -129,7 +130,7 @@ a:focus {
     font-size: 1.2em;
     line-height: 1.5em; }
 
-@media (min-width: 767px) {
+@media (min-width: 768px) {
   .content-section {
     padding-top: 250px; } }
 
