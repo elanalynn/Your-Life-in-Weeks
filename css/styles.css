@@ -251,6 +251,8 @@ label, input {
       padding: 10px; }
   #grid-page .add-event {
     margin-top: 20px; }
+  #grid-page .modal-footer {
+    border-top: none; }
   #grid-page .event-info {
     color: #FFF;
     background-color: #333;

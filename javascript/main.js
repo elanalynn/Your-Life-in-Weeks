@@ -228,7 +228,7 @@ function checkDate( date, eventInfo ) {
   // Fix for events added on day of birth
   if (weeksDiff === 0) {
     weeksDiff = 1;
-  }
+   }
 
   localStorage.setItem( weeksDiff, JSON.stringify( eventInfo ) );
   getLifeEvent( weeksDiff, eventInfo );
