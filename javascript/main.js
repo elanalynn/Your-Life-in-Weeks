@@ -32,7 +32,7 @@ function setPersonalInfo() {
 }
 
 function initialSubmit() {
-  $('.initial-submit').click(function() {
+  $('#initial-submit').click(function() {
     setPersonalInfo();
     window.location = 'grid.html';
   });
