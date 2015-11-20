@@ -96,7 +96,7 @@ function drawGrid() {
       dateCounter = new Date(localStorage.getItem( 'birthday' )),
       unit,
       rowNumber,
-      rowCounter = 1;
+      rowCounter = 0;
       dateCounter.setDate( dateCounter.getDate() + 1 );
 
   for(var i = 0; i < 100; i++) {
