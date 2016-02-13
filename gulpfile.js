@@ -2,16 +2,9 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var minify = require('gulp-minify');
 
-gulp.task('default', ['html', 'styles', 'minify-js'], function() {
-    gulp.watch('./html/**/*.html',['html']);
+gulp.task('default', ['styles', 'minify-js'], function() {
     gulp.watch('./sass/**/*.scss',['styles']);
     gulp.watch('./javascript/**/*.js',['minify-js']);
-});
-
-
-gulp.task('html', function () {
-  gulp.src('./html/**/*.html')
-      .pipe(gulp.dest('./build/html/'));
 });
 
 gulp.task('styles', function() {
