@@ -84,14 +84,14 @@ a:focus {
 }
 
 .intro .intro-body {
-  margin-top: 20px;
+  margin-top: 60px;
   display: flex;
   align-items: center;
 }
 
 .intro .intro-body .brand-heading {
   color: #2c2f30;
-  font-size: 4em;
+  font-size: 2em;
 }
 
 .intro .intro-body .intro-text {
@@ -106,9 +106,24 @@ a:focus {
     }
 
     .intro .intro-body {
-      margin-top: 370px;
-      display: flex;
-      align-items: center;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .intro .intro-body .brand-heading {
+      color: #2c2f30;
+      font-size: 4em;
+    }
+}
+
+@media(min-width:1300px) {
+    .intro {
+        height: 100%;
+        padding: 0;
+    }
+
+    .intro .intro-body {
+        margin-top: 370px;
     }
 }
 

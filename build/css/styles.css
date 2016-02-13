@@ -68,13 +68,13 @@ a:focus {
   -o-background-size: cover; }
 
 .intro .intro-body {
-  margin-top: 20px;
+  margin-top: 60px;
   display: flex;
   align-items: center; }
 
 .intro .intro-body .brand-heading {
   color: #2c2f30;
-  font-size: 4em; }
+  font-size: 2em; }
 
 .intro .intro-body .intro-text {
   font-size: 2em;
@@ -85,9 +85,18 @@ a:focus {
     height: 100%;
     padding: 0; }
   .intro .intro-body {
-    margin-top: 370px;
-    display: flex;
-    align-items: center; } }
+    display: table-cell;
+    vertical-align: middle; }
+  .intro .intro-body .brand-heading {
+    color: #2c2f30;
+    font-size: 4em; } }
+
+@media (min-width: 1300px) {
+  .intro {
+    height: 100%;
+    padding: 0; }
+  .intro .intro-body {
+    margin-top: 370px; } }
 
 .btn-circle {
   width: 70px;
