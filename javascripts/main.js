@@ -128,7 +128,7 @@ function cursorToPointer() {
 function checkEventsInLocalStorage() {
   var savedEvent;
   for ( var key in localStorage ) {
-    for (var i = 0; i < 5200; i++) {
+    for (var i = 0; i < 5200; i++) { 
       if( key == i ){
         savedEvent = JSON.parse(localStorage.getItem(key));
         console.log(key);
@@ -178,7 +178,7 @@ function weekClickListener() {
           parsedAddress + '</p><div id="map"></div></div>');
     } else {
       $( '.event-info' ).append( 'No events this week.' );
-      $( '.event-info' ).append( '<img src="../images/sad-cat.jpg">' );
+      $( '.event-info' ).append( '<img src="images/sad-cat.jpg">' );
     }
     console.log( parsedAddress );
     initMap();
@@ -259,7 +259,7 @@ function validateForm() {
 
   if( tempLength < 3 ) {
     console.log('event title is too short');
-    $('.event-title').append('<p>Your name longer than that!</p>');
+    $('.event-title').append('<p>Your name is longer than that!</p>');
   }
 }
 

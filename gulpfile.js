@@ -3,18 +3,18 @@ var sass = require('gulp-sass');
 var minify = require('gulp-minify');
 
 gulp.task('default', ['styles', 'minify-js'], function() {
-    gulp.watch('./sass/**/*.scss',['styles']);
-    gulp.watch('./javascript/**/*.js',['minify-js']);
+    gulp.watch('sass/**/*.scss',['styles']);
+    gulp.watch('javascripts/**/*.js',['minify-js']);
 });
 
 gulp.task('styles', function() {
-    gulp.src('./sass/**/*.scss')
+    gulp.src('sass/**/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./build/css/'));
+        .pipe(gulp.dest('build/css/'));
 });
 
 gulp.task('minify-js', function () {
-  gulp.src('./javascript/**/*.js')
+  gulp.src('javascripts/**/*.js')
       .pipe(minify())
-      .pipe(gulp.dest('./build/javascript/'));
+      .pipe(gulp.dest('build/javascripts/'));
 });
