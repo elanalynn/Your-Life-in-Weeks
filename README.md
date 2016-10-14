@@ -1,8 +1,8 @@
-# your_life_in_weeks
+# Your Life in Weeks
 
 This is an interactive version of the "Your Life in Weeks" poster from WaitButWhy.com.
 
-To build on this project, you will need to:
+To contribute to this project, you will need to:
 
 * Install an http-server:
 
